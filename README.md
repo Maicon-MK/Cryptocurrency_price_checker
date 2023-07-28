@@ -59,9 +59,7 @@ Desenvolvemos uma aplicação em Python que em tempo real mostra o preço e as 5
 - [@Kaiky](https://github.com/kaikyfersoa)====👨‍💻 
 
 
-## Demonstração
 
-Insira um gif ou um link de alguma demonstração
 
 
 ## Interface
