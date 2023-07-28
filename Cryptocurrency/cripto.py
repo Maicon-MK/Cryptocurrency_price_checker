@@ -25,7 +25,7 @@ def get_recent_trades(symbol, quote_currency):
     base_url = "https://api.binance.com/api/v3/trades"
     params = {
         "symbol": symbol.upper() + quote_currency.upper(),
-        "limit": 5  # Alterado para mostrar as últimas 5 alterações de valores
+        "limit": 5  
     }
 
     try:
@@ -36,7 +36,7 @@ def get_recent_trades(symbol, quote_currency):
             print(f"Últimas cinco alterações do {symbol.capitalize()}:")
             for change in price_changes[-5:]:
                 timestamp, price = change["time"], float(change["price"])
-                date_time = datetime.datetime.fromtimestamp(timestamp // 1000)  # Convertendo milissegundos para segundos
+                date_time = datetime.datetime.fromtimestamp(timestamp // 1000)  
                 date_time_str = date_time.strftime("%Y-%m-%d %H:%M:%S")
                 print(f"{date_time_str} - Preço: ${price:.2f}")
     
@@ -51,8 +51,8 @@ def get_user_input():
     return symbol, quote_currency
 
 def validate_symbol_and_currency(symbol, quote_currency):
-    valid_symbols = ["btc", "eth", "ltc", "xrp", "bch"]  # Adicione outras criptomoedas válidas se desejar
-    valid_currencies = ["usdt", "eur", "brl", "usd", "eur"]  # Adicione outras moedas válidas se desejar
+    valid_symbols = ["btc", "eth", "ltc", "xrp", "bch"]  
+    valid_currencies = ["usdt", "eur", "brl", "usd", "eur"]  
 
     while symbol not in valid_symbols or quote_currency not in valid_currencies:
         print("Criptomoeda ou moeda corrente inválida. Por favor, tente novamente.")
@@ -85,13 +85,11 @@ def on_exit():
     if messagebox.askokcancel("Exit", "Deseja sair da aplicação?"):
         root.destroy()
 
-# Configuração da janela principal
 root = tk.Tk()
 root.title("Cryptocurrency Price Checker")
 root.geometry("400x300")
 root.protocol("WM_DELETE_WINDOW", on_exit)
 
-# Elementos da interface
 instruction_label = tk.Label(root, text="Choose a cryptocoin and a quote")
 instruction_label.pack(pady=10)
 
@@ -115,5 +113,16 @@ recent_trades_label.pack(pady=10)
 
 check_button = tk.Button(root, text="Check Price", command=show_crypto_price)
 check_button.pack(pady=10)
+
+def reset_inputs():
+    crypto_symbol_input.delete(0, tk.END)
+    quote_currency_input.delete(0, tk.END)
+    crypto_price_label.config(text="")
+    recent_trades_label.config(text="")
+
+def on_enter(event):
+    show_crypto_price()
+
+root.bind('<Return>', on_enter)
 
 root.mainloop()
