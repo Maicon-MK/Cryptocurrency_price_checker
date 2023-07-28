@@ -9,8 +9,7 @@ Desenvolvemos uma aplicação em Python que em tempo real mostra o preço e as 5
 
  - [API e documentação Binance ](https://binance-docs.github.io/apidocs/spot/en/#order-book)
  - [Blibioteca: Requests](https://requests.readthedocs.io/projects/pt/pt_BR/latest/user/quickstart.html)
- 
-
+ - [Blibioteca: Tinter](https://docs.python.org/3/library/tkinter.html)
  - [Blibioteca: Datetime](https://docs.python.org/pt-br/3/library/time.html)
 
 
@@ -51,7 +50,7 @@ Desenvolvemos uma aplicação em Python que em tempo real mostra o preço e as 5
 | :---------- | :--------- | :---------------------------------- |
 | `limit`    | `int` | **Ultimas alterações de valores** |
 
-
+### Interface 
 
 
 ## Devs  -------------------------------                                                 
