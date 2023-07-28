@@ -33,7 +33,7 @@ Desenvolvemos uma aplicação em Python que em tempo real mostra o preço e as 5
 
 | Parâmetro   | Tipo       | Descrição                           |
 | :---------- | :--------- | :---------------------------------- |
-| `symbol`    | `string` | **Símbolo da moeda**|
+| `symbol`    | `string` | **Símbolo da criptomoeda, por exemplo, "btc" para Bitcoin.**|
 
 
 | Parâmetro   | Tipo       | Descrição                           |
@@ -68,4 +68,12 @@ Insira um gif ou um link de alguma demonstração
 ## Screenshots
 
 ![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+
+
+## Funcionalidades
+
+- Temas dark e light
+- Preview em tempo real
+- Modo tela cheia
+- Multiplataforma
 
