@@ -25,61 +25,40 @@ def get_recent_trades(symbol, quote_currency):
     base_url = "https://api.binance.com/api/v3/trades"
     params = {
         "symbol": symbol.upper() + quote_currency.upper(),
-        "limit": 5  
+        "limit": 5
     }
 
     try:
         response = requests.get(base_url, params=params)
         if response.status_code == 200:
             crypto_data = response.json()
-            price_changes = crypto_data
-            print(f"Últimas cinco alterações do {symbol.capitalize()}:")
-            for change in price_changes[-5:]:
-                timestamp, price = change["time"], float(change["price"])
-                date_time = datetime.datetime.fromtimestamp(timestamp // 1000)  
-                date_time_str = date_time.strftime("%Y-%m-%d %H:%M:%S")
-                print(f"{date_time_str} - Preço: ${price:.2f}")
+            return crypto_data
     
     except requests.exceptions.RequestException as e:
         print(f"Erro de conexão: {e}")
     
-    return price_changes
-
-def get_user_input():
-    symbol = input("Digite o símbolo da criptomoeda (exemplo: btc): ").lower()
-    quote_currency = input("Digite a moeda desejada (usdt, eur, brl, etc.): ").lower()
-    return symbol, quote_currency
-
-def validate_symbol_and_currency(symbol, quote_currency):
-    valid_symbols = ["btc", "eth", "ltc", "xrp", "bch"]  
-    valid_currencies = ["usdt", "eur", "brl", "usd", "eur"]  
-
-    while symbol not in valid_symbols or quote_currency not in valid_currencies:
-        print("Criptomoeda ou moeda corrente inválida. Por favor, tente novamente.")
-        symbol, quote_currency = get_user_input()
-    
-    return symbol, quote_currency
+    return None
 
 def show_crypto_price():
     symbol = crypto_symbol_input.get().lower()
     quote_currency = quote_currency_input.get().lower()
-    symbol, quote_currency = validate_symbol_and_currency(symbol, quote_currency)
+
     crypto_price = get_binance_price(symbol, quote_currency)
 
     if crypto_price is not None:
         crypto_price_label.config(text=f"Preço atual do {symbol.upper()} em {quote_currency.upper()}: {crypto_price:.2f}")
 
         recent_trades = get_recent_trades(symbol, quote_currency)
-        if recent_trades is None:
-            recent_trades_label.config(text="Últimas 5 alterações de valores:")
-        else:
-            recent_trades_str = "Últimas cinco alterações do {symbol.capitalize()}:\n"
+        if recent_trades is not None:
+            recent_trades_str = "Últimas cinco alterações:\n"
             for change in recent_trades[-5:]:
                 timestamp, price = change["time"], float(change["price"])
                 date_time = datetime.datetime.fromtimestamp(timestamp // 1000)
-                date_time_str = date_time.strftime("%Y-%m-%d %H:%M:%S")
+                date_time_str = date_time.strftime("%d-%m-%Y %H:%M:%S")
                 recent_trades_str += f"{date_time_str} - Preço: ${price:.2f}\n"
             recent_trades_label.config(text=recent_trades_str)
+        else:
+            recent_trades_label.config(text="Nenhuma alteração recente encontrada.")
 
 def on_exit():
     if messagebox.askokcancel("Exit", "Deseja sair da aplicação?"):
