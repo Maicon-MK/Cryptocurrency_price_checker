@@ -64,7 +64,7 @@ Desenvolvemos uma aplicação em Python que em tempo real mostra o preço e as 5
 Insira um gif ou um link de alguma demonstração
 
 
-## Screenshots
+## Interface
 
 ![App Screenshot](img/image.png)
 
